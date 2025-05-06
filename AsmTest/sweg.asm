@@ -1,17 +1,35 @@
 .data
+; nel dubbio facciamo tutto in 64 bit così è più swag
 swagNum dq 7
+swagNum2 dq 89
 swagMex dq "bella", 0
 
+aka dq 7
+akaOffset dq offset aka ; quadword perchè siamo a 64 bit
 .code
 TestFunction proc
 	mov rax, 89
 
-	mov rax, swagNum
-	mov rax, [swagNum] ; uguale al precedente
 
+	; load immediate value
+	mov rax, swagNum
+	mov rax, [swagNum]
+	mov rax, qword ptr swagNum
+
+
+	; load address
+	mov rax, offset swagNum
 	lea rax, swagNum
 	lea rax, [swagNum]  ; uguale al precedente
+	
+	mov rax, [rax] ; dereference di se stesso
 
+
+	mov rax, akaOffset
+	mov rax, [rax]
+	
+	mov rax, rax
+	mov rax, [rax]	; dereference address and load value
 
 	ret
 TestFunction endp
