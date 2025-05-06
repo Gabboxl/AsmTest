@@ -17,7 +17,7 @@ TestFunction proc
 	mov rax, qword ptr swagNum
 
 
-	; load address
+	; load effective address
 	mov rax, offset swagNum
 	lea rax, swagNum
 	lea rax, [swagNum]  ; uguale al precedente
@@ -25,6 +25,8 @@ TestFunction proc
 	mov rax, [rax] ; dereference di se stesso
 
 
+	; non è possibile (almeno in MASM) effettuare un dereference diretto di una variabile (ovvero mov rax, [akaOffset]):
+	; ritornerebbe comunque in rax il contenuto di akaOffset - è sempre un load immediate value
 	mov rax, akaOffset
 	mov rax, [rax]
 	
